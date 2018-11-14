@@ -1,0 +1,4 @@
+xo
+cma
+json_tricks
+numpy
