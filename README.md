@@ -1,7 +1,7 @@
 # betazero
 Tabula Rasa Tic-Tac-Toe
 
-See [the blog post] (https://dspub99.github.io/betazero/betazero.html) for details.
+See [the blog post](https://dspub99.github.io/betazero/betazero.html) for details.
 
 
 Optimize a neural network tic-tac-toe-playing agent
