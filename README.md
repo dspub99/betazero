@@ -21,6 +21,7 @@ Play against the NN
 
 
 hu - human
+
 Your moves are specified by an numberin [0,9],
  which indexes the spaces from upper-left to
  lower-right.
