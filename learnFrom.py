@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import os, sys, time
+import json
 import numpy as np
 import cma
 from ticTacToe import TicTacToe
@@ -14,15 +15,15 @@ nWorkers = int(sys.argv[1])
 opp = sys.argv[2]
 outFn = sys.argv[3]
 
-RewardWin = .5
 MinLosses = 0
+RewardWin = .5
 NRounds0 = 100 #max([10, MinLosses])
 KRounds = 1.0
 MaxNRounds = 100
 ThreshOpp = 10
 Sigma0 = .1
 NRoundsBenchmark = 100
-NSeeds = None #MaxNRounds
+NSeeds = MaxNRounds
 OneMinute = 60
 OneHour = 60*OneMinute
 MaxRunningTime = 411 * OneMinute # int(1000 * OneHour) # was 10 hhours

@@ -31,6 +31,9 @@ class NNPlayer:
     def setName(self, n):
         self._name = n
 
+    def setSeed(self, seed):
+        self._rand.seed(seed)
+
     def name(self):
         return self._name
 
