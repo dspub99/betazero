@@ -7,17 +7,17 @@ See [the blog post](https://dspub99.github.io/betazero/betazero.html) for detail
 Optimize a neural network tic-tac-toe-playing agent
  from random weights using self-play
 
- ./learnFrom.py 2 oa1 nn.json
+ `./learnFrom.py 2 oa1 nn.json`
 
 
 Run optimized NN against minimax
 
- ./vs.py nn.json mm
+ `./vs.py nn.json mm`
 
 
 Play against the NN
 
- ./players.py hu nn.json
+ `./players.py hu nn.json`
 
 
 hu - human
@@ -29,4 +29,5 @@ Your moves are specified by an numberin [0,9],
 
 Play against network from Run #2 into the blog post
 
- ./players.py hu run2.json
+ `./players.py hu run2.json`
+
