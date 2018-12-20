@@ -11941,6 +11941,31 @@ nBudg = 10000 W = 0.000 D = 98.000 L =  2.000 n = 100.000
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>In five out of ten runs the agent achieves perfect play -- 0 losses in 100 games against the minimax player.  Additionally, the process is stable:  As the optimization continues the agent continues to achieve (or revert to) zero losses.</p>
+
+<p>The optimization produces a perfect player only half of the time.  Using the external evaluation (playing against MM) is it easy to tell which player is best.  However, the goal is to produce a player using only self-play information. 
+ To do so, use the following process:
+ <ol>
+  <li> Run N independent optimizations starting at N random initial conditions.
+  <li> Any time a solution is desired for benchmark play (or real, competitive play) play each of the N candidate agents against all of the other N-1.
+  <li> Take the best player as the result of the overall process.
+ </ol>
+
+<p>For instance, if we have each of the N=10 neural networks produced by the 10 optimizations above play the other N-1 = 9 networks 100 times and return +1 for a win, 0 for a draw, and -1 for a loss, then the average return for each network is</p>
+<ol>
+<li>0.5162</li>
+<li><strong>0.5555</strong></li>
+<li>0.5485</li>
+<li>0.5088</li>
+<li>0.3668</li>
+<li>0.5000</li>
+<li>0.5500</li>
+<li>0.5248</li>
+<li>0.5035</li>
+<li>0.4250</li>
+</ol>
+<p>The NN from run #2 is selected as the best.  Note that this final selection only uses self-play information.</p>
+
+
 <h3 id="Discussion">Discussion<a class="anchor-link" href="#Discussion">&#182;</a></h3><p>For the successful experiments above, OA used $nPlay=1$, a single simulation for each evaluation.  One interpretation might be that using such a small value for $nPlay$ causes OA to play noisy moves that are biased toward better play.  The noise helps the learner explore the game space, and the bias toward better play encourages steady improvement.</p>
 <p>On the the other hand, you might wonder whether search is needed at all.  Maybe just playing against the last best agent would be enough.  Or maybe doing that and adding some noise might be enough to solve the problem.  The list of negative results below suggest that these two ideas and many variations would not solve the problem.</p>
 <p>The methods below rarely reached zero losses and were not stable:  They did not stay at zero losses after continued optimization.</p>
@@ -11957,21 +11982,6 @@ nBudg = 10000 W = 0.000 D = 98.000 L =  2.000 n = 100.000
 <li>Evaluate against previous best</li>
 <li>Evaluate against previous best w/various hall-of-fame ideas</li>
 </ul>
-<p>Additionally, four of the ten runs did not achieve zero losses.  Given the high proportion of successes, this problem could be solved with multiple random starts.  We could run N independent optimizations starting at N random initial conditions, and any time a solution is desired for benchmark play (or real, competitive play) each of the N candidate agents could play the other N-1, and the best of them would be considered the resultant agent of the entire process.</p>
-<p>For instance, if we have each of the 10 neural networks produced by the 10 optimizations above play the other 9 networks 100 times and return +1 for a win, 0 for a draw, and -1 for a loss, then the average return for each network is</p>
-<ol>
-<li>0.5162</li>
-<li><strong>0.5555</strong></li>
-<li>0.5485</li>
-<li>0.5088</li>
-<li>0.3668</li>
-<li>0.5000</li>
-<li>0.5500</li>
-<li>0.5248</li>
-<li>0.5035</li>
-<li>0.4250</li>
-</ol>
-<p>The NN from run #2 is selected as the best.  Note that this final selection only uses self-play information.</p>
 
 </div>
 </div>
